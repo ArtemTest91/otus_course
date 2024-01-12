@@ -1,2 +1,2 @@
 # otus_course
-for home work
+Репозиторий для домашних работ по курсу OTUS Python QA Engineer
