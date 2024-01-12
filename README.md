@@ -1,0 +1,2 @@
+# otus_course
+Репозиторий для домашних работ по курсу OTUS Python QA Engineer
