@@ -1,7 +1,4 @@
 from otus_course.hw2.src.Figure import Figure
-from otus_course.hw2.src.Square import Square
-from otus_course.hw2.src.Circle import Circle
-from otus_course.hw2.src.Rectangle import Rectangle
 
 
 class Triangle(Figure):
@@ -22,4 +19,6 @@ class Triangle(Figure):
         return self.side1 + self.side2 + self.side3
 
     def add_area(self, other_figure):
+        if not isinstance(other_figure, Figure):
+            raise ValueError("Нужно передать фигуру")
         return self.get_area() + other_figure.get_area()

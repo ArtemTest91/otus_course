@@ -1,7 +1,5 @@
 from otus_course.hw2.src.Figure import Figure
-from otus_course.hw2.src.Square import Square
-from otus_course.hw2.src.Triangle import Triangle
-from otus_course.hw2.src.Rectangle import Rectangle
+
 
 
 class Circle(Figure):
@@ -21,4 +19,6 @@ class Circle(Figure):
         return self.PI * self.d
 
     def add_area(self, other_figure):
+        if not isinstance(other_figure, Figure):
+            raise ValueError("Нужно передать фигуру")
         return self.get_area() + other_figure.get_area()
