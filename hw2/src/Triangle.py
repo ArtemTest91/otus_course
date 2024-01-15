@@ -12,8 +12,9 @@ class Triangle(Figure):
         self.side3 = side3
         self.p = 0.5 * (side1 + side2 + side3)
 
+
     def get_area(self):
-        return (self.p * (self.p - self.side1) * (self.p - self.side2) * (self.p - self.side3)) ** 0.5
+        return round((self.p * (self.p - self.side1) * (self.p - self.side2) * (self.p - self.side3)) ** 0.5, 2)
 
     def get_perimeter(self):
         return self.side1 + self.side2 + self.side3
