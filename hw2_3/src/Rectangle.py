@@ -1,4 +1,4 @@
-from otus_course.hw2.src.Figure import Figure
+from otus_course.hw2_3.src.Figure import Figure
 
 
 class Rectangle(Figure):
