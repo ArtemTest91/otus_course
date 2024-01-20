@@ -5,14 +5,13 @@ class Triangle(Figure):
 
     def __init__(self, side1: int, side2: int, side3: int):
         super().__init__(name='tria')
+        if ((side1 <= 0 or side2 <= 0 or side3 <= 0) or
+                (side1 + side2 <= side3 or side1 + side3 <= side2 or side2 + side3 <= side1)):
+            raise ValueError("Некорректные значения сторон треугольника")
         self.side1 = side1
         self.side2 = side2
         self.side3 = side3
         self.p = 0.5 * (side1 + side2 + side3)
-        if side1 <= 0 or side2 <= 0 or side3 <= 0:
-            raise ValueError("Стороны треугольника должны быть больше 0")
-        elif self.side1 + self.side2 <= self.side3 or self.side1 + self.side3 <= self.side2 or self.side2 + self.side3 <= self.side1:
-            raise ValueError("Некорректные значения сторон треугольника")
 
     def get_area(self):
         return round((self.p * (self.p - self.side1) * (self.p - self.side2) * (self.p - self.side3)) ** 0.5, 2)
