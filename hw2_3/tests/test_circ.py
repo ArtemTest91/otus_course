@@ -29,6 +29,7 @@ def test_negative_circ_perim():
     with pytest.raises(ValueError):
         Circle(-3)
 
+
 @pytest.mark.parametrize(('figure1', 'figure2'),
                          [(Circle(5), Triangle(16, 20, 32))],
                          ids=['Круг + Треугольник'])
