@@ -4,7 +4,6 @@ import json
 from otus_course.hw4 import CSV_FILE
 from otus_course.hw4 import JSON_FILE
 
-
 def read_books_from_csv():
     with open(CSV_FILE, newline='') as books:
         books_read = csv.DictReader(books)
