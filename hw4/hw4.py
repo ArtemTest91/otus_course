@@ -5,13 +5,28 @@ from otus_course.hw4 import CSV_FILE
 from otus_course.hw4 import JSON_FILE
 
 
-def load_data():
+def read_books_from_csv():
     with open(CSV_FILE, newline='') as books:
         books_read = csv.DictReader(books)
         books_data = list(books_read)
 
+    return books_data
+
+
+def read_users_from_json():
     with open(JSON_FILE) as users:
         users_data = json.load(users)
+
+    return users_data
+
+
+def load_data():
+    books_data = read_books_from_csv()
+    users_data = read_users_from_json()
+
+    for book in books_data:
+        book['pages'] = int(book['Pages'])
+        del book['Pages']
 
     return books_data, users_data
 
@@ -31,16 +46,29 @@ def distribute_books(books, users):
         user_books = []
 
         for _ in range(books_per_user):
-            user_books.append(books[book_index])
+            user_books.append({
+                "title": books[book_index]["Title"],
+                "author": books[book_index]["Author"],
+                "pages": books[book_index]["pages"],
+                "genre": books[book_index]["Genre"]
+            })
             book_index = (book_index + 1) % total_books
 
         if remaining_books > 0:
-            user_books.append(books[book_index])
+            user_books.append({
+                "title": books[book_index]["Title"],
+                "author": books[book_index]["Author"],
+                "pages": books[book_index]["pages"],
+                "genre": books[book_index]["Genre"]
+            })
             book_index = (book_index + 1) % total_books
             remaining_books -= 1
 
         result.append({
-            "user": user,
+            "name": user["name"],
+            "gender": user["gender"],
+            "address": user["address"],
+            "age": user["age"],
             "books": user_books
         })
 
