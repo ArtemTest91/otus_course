@@ -36,7 +36,7 @@ def test_breweries_by_type(brewery_type):
     assert all(brewery["brewery_type"] == brewery_type for brewery in response.json())
 
 
-@pytest.mark.parametrize("city", ["san_diego", "new_york"])
+@pytest.mark.parametrize("city", ["San Diego", "New York"])
 def test_breweries_in_city(city):
     response = requests.get(f"{BASE_URL_BREW}/breweries?by_city={city}")
     assert response.status_code == 200
