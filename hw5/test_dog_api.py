@@ -2,7 +2,7 @@ import requests
 import pytest
 
 BASE_URL_DOG = 'https://dog.ceo/api'
-
+breeds_to_test = ["chihuahua", "poodle", "beagle", "husky", "maltese"]
 
 def test_random_dog():
     response = requests.get(f"{BASE_URL_DOG}/breeds/image/random")
@@ -19,7 +19,7 @@ def test_list_all_breeds():
     assert "bulldog", "bullterrier" in response.json()["message"]
 
 
-@pytest.mark.parametrize("breed", ["chihuahua", "akita"])
+@pytest.mark.parametrize("breed", breeds_to_test)
 def test_specific_breed_images(breed):
     response = requests.get(f"{BASE_URL_DOG}/breed/{breed}/images/random")
     assert response.status_code == 200
@@ -35,9 +35,6 @@ def test_sub_breed_list(sub_breed):
     assert response.json()['status'] == 'success'
     assert "message" in response.json()
     assert isinstance(response.json()["message"], list)
-
-
-breeds_to_test = ["chihuahua", "poodle", "beagle", "husky", "maltese"]
 
 
 @pytest.mark.parametrize("breed", breeds_to_test)
