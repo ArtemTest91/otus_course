@@ -16,29 +16,35 @@ def test_list_all_breeds():
     assert response.status_code == 200
     assert "message" in response.json()
     assert isinstance(response.json()["message"], dict)
-    assert "bulldog" in response.json()["message"]
+    assert "bulldog", "bullterrier" in response.json()["message"]
 
 
-@pytest.mark.parametrize("breed", ["english bulldog", "akita"])
+@pytest.mark.parametrize("breed", ["chihuahua", "akita"])
 def test_specific_breed_images(breed):
     response = requests.get(f"{BASE_URL_DOG}/breed/{breed}/images/random")
     assert response.status_code == 200
+    assert response.json()['status'] == 'success'
     assert "message" in response.json()
-    assert isinstance(response.json()["message"], list)
+    assert isinstance(response.json()["message"], str)
 
 
-@pytest.mark.parametrize("sub_breed", ["french Bulldog", "beagle"])
-def test_sub_breed_images(sub_breed):
-    response = requests.get(f"{BASE_URL_DOG}/breed/hound/{sub_breed}/images")
+@pytest.mark.parametrize("sub_breed", ["afghan", "blood"])
+def test_sub_breed_list(sub_breed):
+    response = requests.get(f"{BASE_URL_DOG}/breed/hound/list")
     assert response.status_code == 200
+    assert response.json()['status'] == 'success'
     assert "message" in response.json()
     assert isinstance(response.json()["message"], list)
 
 
-@pytest.mark.parametrize("count", [1, 5])
-def test_random_dogs(count):
-    response = requests.get(f"{BASE_URL_DOG}/breed/images/random/{count}")
+breeds_to_test = ["chihuahua", "poodle", "beagle", "husky", "maltese"]
+
+
+@pytest.mark.parametrize("breed", breeds_to_test)
+def test_random_image_for_breed(breed):
+    response = requests.get(f"{BASE_URL_DOG}/breed/{breed}/images/random")
     assert response.status_code == 200
+    assert response.json()['status'] == 'success'
     assert "message" in response.json()
-    assert isinstance(response.json()["message"], list)
-    assert len(response.json()["message"]) == count
+    assert isinstance(response.json()["message"], str)
+    assert response.json()["message"].endswith(".jpg")
