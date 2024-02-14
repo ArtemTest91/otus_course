@@ -1,5 +1,4 @@
 import requests
-import conftest
 
 
 def test_check_status_code(url, status_code):
